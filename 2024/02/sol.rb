@@ -8,6 +8,9 @@ data.each do |r|
   end
 end
 
-p data.map { |rec| 
-  rec.each_cons(2).all? { |a,b| (b-a).between?(1, 3) }
-}.count true
+def safe(arr)
+  arr.each_cons(2).all? { |a,b| (b-a).between?(1, 3) }
+end
+
+# one
+p data.map { |r| safe(r) }.count true
