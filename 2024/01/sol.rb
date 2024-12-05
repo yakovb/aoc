@@ -20,7 +20,7 @@ bs.sort!
 # one
 puts as.zip(bs)
   .map { |pair| a,b = pair; (a-b).abs }
-  .reduce(0, &:+)
+  .sum
 
 # two
 bfreq = bs.tally
