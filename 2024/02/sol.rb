@@ -3,19 +3,11 @@ data = File
   .map { |s| s.scan(/\d+/).map &:to_i }
 
 data.each do |r|
-  unless r.each_cons(2).all? { |a,b| a >=b }
+  unless r == r.sort
     r.reverse!
   end
 end
 
-one = []
-data.each do |rec|
-    decr = []
-    rec.each_cons(2) do |rec| 
-      a,b = rec; 
-      decr << (a-b).between?(1, 3)
-    end
-    one << decr
-  end  
-
-p one.map { |rep| rep.all? }.count true
+p data.map { |rec| 
+  rec.each_cons(2).all? { |a,b| (b-a).between?(1, 3) }
+}.count true
