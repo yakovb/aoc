@@ -1,29 +1,14 @@
 #!/usr/bin/env ruby
 
-as = []
-bs = []
-File.open(ARGV[0])
-  .readlines
-  .map do |l|
-    l.split(/\s+/)
-      .map(&:to_i)
-  end
-    .each do |l|
-      a,b = l
-      as << a
-      bs << b
-    end
-
-as.sort!
-bs.sort!
+data = File
+  .readlines(ARGV[0])
+  .map { |l| l.scan(/\d+/).map &:to_i }
+  .transpose
+  .map &:sort
 
 # one
-puts as.zip(bs)
-  .map { |pair| a,b = pair; (a-b).abs }
-  .sum
+p data.transpose.sum { |a,b| (a-b).abs }
 
 # two
-bfreq = bs.tally
-puts as.map { |a| bfreq.fetch(a,0) * a }
-  .sum
-
+freq = data[1].tally
+p data.transpose.sum { |a,b| freq.fetch(a,0) * a }
