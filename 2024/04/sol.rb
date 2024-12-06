@@ -13,7 +13,7 @@ def word(idxs, str)
     idxs
         .map { |r,c| $grid.dig(r,c) }
         .join
-        .start_with?(str) ? 1 : 0
+        .match?(str) ? 1 : 0
 end
 
 def fwd(i)
@@ -67,8 +67,9 @@ def xmas(r,c)
 end
 
 def mas(r,c)
-    [upright(r,c), upleft(r,c), downright(r,c), downleft(r,c)]
-        .sum { |idx| word(idx, "MAS") }
+    m = [downright(r,c), upright(r+2, c)]
+            .sum { |idx| word( idx, Regexp.new("^(MAS|SAM)") ) }
+    m == 2 ? 1 : 0
 end
 
 nxmas = 0
