@@ -8,7 +8,11 @@ input
   .first
   .each do |r|
     a,b = r.split('|').map &:to_i
-    rules.key? a  ?  rules[a] << b  :  rules[a] = [b]
+    if rules.key? a 
+      rules[a] << b
+    else
+      rules[a] = [b]
+    end
   end
 
 updates = input[1]
