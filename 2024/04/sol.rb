@@ -17,10 +17,10 @@ def word(idxs, str)
 end
 
 def fwd(i)
-    (i..(i+3)).to_a
+    (i..(i+$diaglen)).to_a
 end
 def bwd(i)
-    ((i-3)..i).to_a.reverse
+    ((i-$diaglen)..i).to_a.reverse
 end
 def const(i)
     Array.new(4, i)
@@ -76,7 +76,9 @@ nxmas = 0
 nmas = 0
 (0...$rmax).each do |row|
     (0...$cmax).each do |col|
+        $diaglen = 3
         nxmas += xmas(row, col)
+        $diaglen = 2
         nmas += mas(row, col)
     end
 end
